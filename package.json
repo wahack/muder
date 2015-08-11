@@ -1,0 +1,27 @@
+{
+  "name": "muder",
+  "version": "0.1.0",
+  "description": "an object mapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test --harmony"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wahack/muder.git"
+  },
+  "keywords": [
+    "object",
+    "mapper"
+  ],
+  "author": "wahack (liaoyux@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wahack/muder/issues"
+  },
+  "homepage": "https://github.com/wahack/muder#readme",
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "mocha": "^2.2.5"
+  }
+}
