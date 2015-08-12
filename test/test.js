@@ -10,7 +10,31 @@ var origin = {
     name: {
       first: 'liao',
       last: 'ethan'
-    }
+    },
+    componey:{
+      name: 'honhe',
+      address:{
+        code: '518052',
+        locate: 'shenzhen'
+      }
+    },
+    tags: [
+      'developer','front-end','onepiece-fan'
+    ],
+    WorkMates: [
+      {
+        Name: 'xiaoyue',
+        Age: 25
+      },
+      {
+        Name: 'xiaoshan',
+        Age: 22
+      },
+      {
+        Name: 'xiaolong',
+        Age: 28
+      }
+    ]
   }
 };
 
@@ -21,10 +45,21 @@ var mapper = {
     first: 'brokerDetail.name.last',
     sex: 'brokerDetail.sex',
     name: 'brokerName',
-    hah: {
-      name: 'brokerName'
+    location: {
+      code: 'brokerDetail.componey.address.code',
+      city: 'brokerDetail.componey.address.locate'
     }
-  }
+  },
+  tags: [
+    'brokerDetail.tags'
+  ],
+  workmates:[
+    {
+      name: 'brokerDetail.WorkMates[].Name',
+      age: 'brokerDetail.WorkMates[].Age'
+    }
+  ]
+
 };
 
 var result = {
@@ -34,10 +69,26 @@ var result = {
     first: 'ethan',
     sex: 'male',
     name: 'liao',
-    hah: {
-      name: 'liao'
+    location: {
+      code: '518052',
+      city: 'shenzhen'
     }
-  }
+  },
+  tags: ['developer','front-end','onepiece-fan'],
+  workmates: [
+    {
+      name: 'xiaoyue',
+      age: 25
+    },
+    {
+      name: 'xiaoshan',
+      age: 22
+    },
+    {
+      name: 'xiaolong',
+      age: 28
+    }
+  ]
 };
 
 describe('muder', function () {
