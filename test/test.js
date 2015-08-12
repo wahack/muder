@@ -53,6 +53,9 @@ var mapper = {
   tags: [
     'brokerDetail.tags'
   ],
+  workmatesName: [
+    'brokerDetail.WorkMates[].Name'
+  ],
   workmates:[
     {
       name: 'brokerDetail.WorkMates[].Name',
@@ -75,6 +78,7 @@ var result = {
     }
   },
   tags: ['developer','front-end','onepiece-fan'],
+  workmatesName: ['xiaoyue','xiaoshan','xiaolong'],
   workmates: [
     {
       name: 'xiaoyue',
@@ -92,8 +96,14 @@ var result = {
 };
 
 describe('muder', function () {
-  it('test result', function () {
-    var r = muder(origin, mapper);
-    assert.deepEqual(r, result);
+  // it('test muder', function () {
+  //   var r = muder(origin, mapper);
+  //   assert.deepEqual(r, result);
+  // });
+  it ('test _dig', function () {
+    console.log(mapper.workmatesName);
+    var r = muder(origin, mapper.workmatesName[0]);
+    assert.deepEqual(r, result.workmatesName);
   });
+
 });
