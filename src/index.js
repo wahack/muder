@@ -2,7 +2,7 @@ var _ = require('lodash');
 // var addons = require('./addons');
 
 var muder =  function (source, mapper) {
-  var result = {};
+  let result = {};
   _.forEach(mapper, (ref, key) => {
     result[key] = _map(source, ref);
   });
@@ -10,18 +10,17 @@ var muder =  function (source, mapper) {
 };
 
 function _map (source, mapper) {
-  var result, tem={};
+  let result, tem={};
   if ( mapper instanceof Array) {
     result = [];
     _.forEach(mapper, ref => {
       if (typeof ref === 'string') {
         result.push(_map(source, ref));
       } else {
-        _.mapValues(ref, val =>  _map(source,val));
-        });
+        result.push(_zipObject(_.mapValues(ref, val =>  _map(source,val))));
       }
-
     });
+
     return _.flatten(result);
   }
   if (typeof mapper === 'object') {
@@ -40,30 +39,28 @@ function _map (source, mapper) {
 }
 //
 function _zipObject(ob) {
-  var result = [], values, keys, i = 0, tmp;
+  let result = [], values, keys, keysLen, i = 0, j,tmp, len = 0;
   keys = _.keys(ob);
+  keysLen = keys.length;
   values = _.values(ob);
 
-  for (var j =0; j < values.length; j++) {
-    tmp = [];
-    values[j].shift();
-
+  for (j =0; j < values.length; j++) {
+    len = Math.max(len, typeof values[j]!=='string'&&values[j].length || 0);
   }
-  _.forEach(values, val => {
+  for (j = 0; j < len; j++) {
     tmp = {};
-    for (i = 0; i< val.length; i++) {
-      tmp[keys[i]] = val[i];
+    for (i =0; i< keysLen; i++){
+      tmp[keys[i]] = ob[keys[i]].shift ? ob[keys[i]].shift()||'' : ob[keys[i]];
     }
     result.push(tmp);
-  });
+  }
   return result;
 }
 
 // mapper formats: key.somearray[].key2
 // return [key.somearray[0].key2, key.somearray[1].key2, ....]
 function _dig(source, mapper) {
-  var result = [];
-  var sourceChildArray, mapperChild;
+  let result = [], sourceChildArray, mapperChild;
   sourceChildArray = _map(source, mapper.substr(0, mapper.indexOf('[]')));
   mapperChild = mapper.substr(mapper.indexOf('[]')+3);
   _.map(sourceChildArray, sourceChild => {
@@ -77,6 +74,6 @@ function _channel (source, ref) {
   return ref.split('|').length === 2 ?
     addons[ref.split('|')[1]](_.get(source,ref))
     : _.get(source,ref) || '';
-};
+}
 
-module.exports = _dig;
+module.exports = muder;

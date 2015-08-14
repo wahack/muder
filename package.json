@@ -4,7 +4,7 @@
   "description": "an object mapper",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test --harmony"
+    "test": "mocha test --compilers js:babel/register"
   },
   "repository": {
     "type": "git",

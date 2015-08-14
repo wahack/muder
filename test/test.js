@@ -28,7 +28,7 @@ var origin = {
       },
       {
         Name: 'xiaoshan',
-        Age: 22
+        Age: 21
       },
       {
         Name: 'xiaolong',
@@ -59,7 +59,8 @@ var mapper = {
   workmates:[
     {
       name: 'brokerDetail.WorkMates[].Name',
-      age: 'brokerDetail.WorkMates[].Age'
+      age: 'brokerDetail.WorkMates[].Age',
+      id: 'brokerId'
     }
   ]
 
@@ -82,28 +83,32 @@ var result = {
   workmates: [
     {
       name: 'xiaoyue',
-      age: 25
+      age: 25,
+      id: 123
     },
     {
       name: 'xiaoshan',
-      age: 22
+      age: 21,
+      id: 123
     },
     {
       name: 'xiaolong',
-      age: 28
+      age: 28,
+      id: 123
     }
   ]
 };
 
 describe('muder', function () {
-  // it('test muder', function () {
-  //   var r = muder(origin, mapper);
-  //   assert.deepEqual(r, result);
-  // });
-  it ('test _dig', function () {
-    console.log(mapper.workmatesName);
-    var r = muder(origin, mapper.workmatesName[0]);
-    assert.deepEqual(r, result.workmatesName);
+  it('test muder', function () {
+    var r = muder(origin, mapper);
+    assert.deepEqual(r, result);
+    console.log(r);
   });
+  // it ('test _dig', function () {
+  //   // console.log(mapper.workmatesName);
+  //   var r = muder(origin, mapper.workmatesName[0]);
+  //   assert.deepEqual(r, result.workmatesName);
+  // });
 
 });
