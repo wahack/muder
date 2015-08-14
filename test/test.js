@@ -103,7 +103,6 @@ describe('muder', function () {
   it('test muder', function () {
     var r = muder(origin, mapper);
     assert.deepEqual(r, result);
-    console.log(r);
   });
   // it ('test _dig', function () {
   //   // console.log(mapper.workmatesName);

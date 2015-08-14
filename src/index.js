@@ -20,7 +20,6 @@ function _map (source, mapper) {
         result.push(_zipObject(_.mapValues(ref, val =>  _map(source,val))));
       }
     });
-
     return _.flatten(result);
   }
   if (typeof mapper === 'object') {
@@ -37,9 +36,14 @@ function _map (source, mapper) {
     return _channel (source, mapper);
   }
 }
-//
+
+/**
+ * to zip the object
+ * input: {a: [1,2,3], b: [4,5,6], c:1}
+ * output: [{a:1,b:4,c:1}, {a:2,b:5,c:1}, {a:3,b:6,c:1}]
+*/
 function _zipObject(ob) {
-  let result = [], values, keys, keysLen, i = 0, j,tmp, len = 0;
+  let result = [], values, keys, keysLen, i, j, tmp, len = 0;
   keys = _.keys(ob);
   keysLen = keys.length;
   values = _.values(ob);
@@ -49,7 +53,7 @@ function _zipObject(ob) {
   }
   for (j = 0; j < len; j++) {
     tmp = {};
-    for (i =0; i< keysLen; i++){
+    for (i = 0; i< keysLen; i++){
       tmp[keys[i]] = ob[keys[i]].shift ? ob[keys[i]].shift()||'' : ob[keys[i]];
     }
     result.push(tmp);
@@ -57,8 +61,11 @@ function _zipObject(ob) {
   return result;
 }
 
-// mapper formats: key.somearray[].key2
-// return [key.somearray[0].key2, key.somearray[1].key2, ....]
+/**
+ * transform the mapper contains [] to array
+ * input: key1.keyarray[].key2
+ * output: [key1.keyarray[0].key2, key1.keyarray[1].key2,... ]
+*/
 function _dig(source, mapper) {
   let result = [], sourceChildArray, mapperChild;
   sourceChildArray = _map(source, mapper.substr(0, mapper.indexOf('[]')));
@@ -69,6 +76,9 @@ function _dig(source, mapper) {
   return result;
 }
 
+/**
+ * get the value of passing object
+*/
 function _channel (source, ref) {
   if (!ref) return source;
   return ref.split('|').length === 2 ?
