@@ -1,8 +1,11 @@
 var _ = require('lodash');
-// var addons = require('./addons');
+var addons = require('./addons');
 
-var muder =  function (source, mapper) {
+var muder =  function (source, mapper, addon) {
   let result = {};
+  if (!_.isEmpty(addon)){
+    _.assign(addons, addon);
+  }
   _.forEach(mapper, (ref, key) => {
     result[key] = _map(source, ref);
   });
@@ -34,6 +37,12 @@ function _map (source, mapper) {
       return _dig(source, mapper);
     }
     return _channel (source, mapper);
+  }
+  if (typeof mapper === 'function') {
+    return mapper(source);
+  }
+  if (typeof mapper === 'number') {
+    return mapper;
   }
 }
 
@@ -81,8 +90,9 @@ function _dig(source, mapper) {
 */
 function _channel (source, ref) {
   if (!ref) return source;
+  // console.log(ref.split('|')[1]);
   return ref.split('|').length === 2 ?
-    addons[ref.split('|')[1]](_.get(source,ref))
+    addons[ref.split('|')[1]]&&addons[ref.split('|')[1]](_.get(source,ref.split('|')[0]))
     : _.get(source,ref) || '';
 }
 

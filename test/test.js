@@ -2,7 +2,7 @@ var assert = require('assert');
 var muder = require('../');
 
 var origin = {
-  brokerId: 123,
+  brokerId: '123',
   brokerName: 'liao',
   brokerDetail: {
     from: 'china',
@@ -39,7 +39,8 @@ var origin = {
 };
 
 var mapper = {
-  id: 'brokerId',
+  test: 'test',
+  id: 'brokerId|num',
   name: 'brokerName',
   detail: {
     first: 'brokerDetail.name.last',
@@ -60,14 +61,27 @@ var mapper = {
     {
       name: 'brokerDetail.WorkMates[].Name',
       age: 'brokerDetail.WorkMates[].Age',
-      id: 'brokerId'
+      id: 'brokerId|num'
     }
-  ]
+  ],
+  isMale: function (source) {
+    return source.brokerDetail.sex === 'male';
+  },
+  tags2: function (source) {
+    return source.brokerDetail.tags;
+  },
+  year: 2015,
+  extra: function () {
+    return {
+      extra: ''
+    };
+  }
 
 };
 
 var result = {
   id: 123,
+  test: '',
   name: 'liao',
   detail: {
     first: 'ethan',
@@ -96,7 +110,13 @@ var result = {
       age: 28,
       id: 123
     }
-  ]
+  ],
+  isMale: true,
+  tags2: ['developer','front-end','onepiece-fan'],
+  year: 2015,
+  extra: {
+    extra: ''
+  }
 };
 
 describe('muder', function () {
