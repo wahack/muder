@@ -119,8 +119,8 @@ var result = {
   }
 };
 
-describe('muder', function () {
-  it('test muder', function () {
+describe('example2', function () {
+  it('muder', function () {
     var r = muder(origin, mapper);
     assert.deepEqual(r, result);
   });

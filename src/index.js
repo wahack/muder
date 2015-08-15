@@ -13,7 +13,7 @@ var muder =  function (source, mapper, addon) {
 };
 
 function _map (source, mapper) {
-  let result, tem={};
+  let result;
   if ( mapper instanceof Array) {
     result = [];
     _.forEach(mapper, ref => {

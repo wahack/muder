@@ -1,16 +1,7 @@
-# muder
-An  object-mapper easy to use.
+var assert = require('assert');
+var muder = require('../');
 
-**usage**
-
-    var muder = require('muder')
-
-    var result = muder(source, mapper[, addon]);
-
-# example
-
-**source object**
-{
+var source = {
   studentID: '123',
   firstName: 'liao',
   lastName: 'ethan',
@@ -31,10 +22,9 @@ An  object-mapper easy to use.
     ],
     tags: ['grade-two','good']
   }
-}
+};
 
-**mapper**
-{
+var mapper = {
   id: 'studentID|num',
   name: {
     firstName: 'firstName',
@@ -61,19 +51,9 @@ An  object-mapper easy to use.
   constant: function() {
     return 'this is a constant';
   }
-}
+};
 
-**map the object**
-
-  var result = muder(source, mapper,{
-      hello: function (name) {
-        return 'hello '+name;
-      }
-  });
-
-**result**
-
-{
+var result = {
   id: 123,
   name: {
     firstName: 'liao',
@@ -100,4 +80,15 @@ An  object-mapper easy to use.
   sayHello: 'hello ethan',
   sayMorning: 'Morning ethan liao',
   constant: 'this is a constant'
-}
+};
+
+describe('example1', function () {
+  it('muder', function () {
+    var r = muder(source, mapper, {
+        hello: function (name) {
+          return 'hello '+name;
+        }
+    });
+    assert.deepEqual(r, result);
+  });
+});
