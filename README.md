@@ -7,6 +7,11 @@ An  object-mapper easy to use.
 
     var result = muder(source, mapper[, addon]);
 
+
+For a full example check the `test/example*.js` file.
+
+
+
 # example
 
 **source object**

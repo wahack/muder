@@ -1,7 +1,4 @@
-var assert = require('assert');
-var muder = require('../');
-
-var origin = {
+exports.source = {
   brokerId: '123',
   brokerName: 'liao',
   brokerDetail: {
@@ -38,7 +35,7 @@ var origin = {
   }
 };
 
-var mapper = {
+exports.mapper = {
   test: 'test',
   id: 'brokerId|num',
   name: 'brokerName',
@@ -79,7 +76,7 @@ var mapper = {
 
 };
 
-var result = {
+exports.result = {
   id: 123,
   test: '',
   name: 'liao',
@@ -118,16 +115,3 @@ var result = {
     extra: ''
   }
 };
-
-describe('example2', function () {
-  it('muder', function () {
-    var r = muder(origin, mapper);
-    assert.deepEqual(r, result);
-  });
-  // it ('test _dig', function () {
-  //   // console.log(mapper.workmatesName);
-  //   var r = muder(origin, mapper.workmatesName[0]);
-  //   assert.deepEqual(r, result.workmatesName);
-  // });
-
-});

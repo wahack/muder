@@ -1,7 +1,4 @@
-var assert = require('assert');
-var muder = require('../');
-
-var source = {
+exports.source = {
   studentID: '123',
   firstName: 'liao',
   lastName: 'ethan',
@@ -24,7 +21,7 @@ var source = {
   }
 };
 
-var mapper = {
+exports.mapper = {
   id: 'studentID|num',
   name: {
     firstName: 'firstName',
@@ -53,7 +50,7 @@ var mapper = {
   }
 };
 
-var result = {
+exports.result = {
   id: 123,
   name: {
     firstName: 'liao',
@@ -81,14 +78,3 @@ var result = {
   sayMorning: 'Morning ethan liao',
   constant: 'this is a constant'
 };
-
-describe('example1', function () {
-  it('muder', function () {
-    var r = muder(source, mapper, {
-        hello: function (name) {
-          return 'hello '+name;
-        }
-    });
-    assert.deepEqual(r, result);
-  });
-});
