@@ -108,3 +108,9 @@ For a full example check the `test/example*.js` file.
       sayMorning: 'Morning ethan liao',
       constant: 'this is a constant'
     }
+
+
+
+**This project is inspired by**
+
+https://github.com/imyelo/barrow
