@@ -4,22 +4,24 @@ var _ = require('lodash');
 
 module.exports = {
   _map: function _map (source, mapper) {
-    let result;
+    var result, self = this;
     if ( mapper instanceof Array) {
       result = [];
-      _.forEach(mapper, ref => {
+      _.forEach(mapper, function (ref) {
         if (typeof ref === 'string') {
-          result.push(this._map(source, ref));
+          result.push(self._map(source, ref));
         } else {
-          result.push(this._zipObject(_.mapValues(ref, val => this._map(source,val))));
+          result.push(self._zipObject(_.mapValues(ref, function (val){
+            return self._map(source,val);
+          })));
         }
       });
       return _.flatten(result);
     }
     if (typeof mapper === 'object') {
       result = {};
-      _.forEach(mapper, (ref, key) => {
-        result[key] = this._map(source, ref);
+      _.forEach(mapper, function (ref, key){
+        result[key] = self._map(source, ref);
       });
       return result;
     }
@@ -42,7 +44,7 @@ module.exports = {
    * output: [{a:1,b:4,c:1}, {a:2,b:5,c:1}, {a:3,b:6,c:1}]
   */
   _zipObject: function _zipObject(ob) {
-    let result = [], values, keys, keysLen, i, j, tmp, len = 0;
+    var result = [], values, keys, keysLen, i, j, tmp, len = 0;
     keys = _.keys(ob);
     keysLen = keys.length;
     values = _.values(ob);
@@ -66,11 +68,11 @@ module.exports = {
    * output: [key1.keyarray[0].key2, key1.keyarray[1].key2,... ]
   */
   _dig: function _dig(source, mapper) {
-    let result = [], sourceChildArray, mapperChild;
+    var result = [], self = this, sourceChildArray, mapperChild;
     sourceChildArray = this._map(source, mapper.substr(0, mapper.indexOf('[]')));
     mapperChild = mapper.substr(mapper.indexOf('[]')+3);
-    _.map(sourceChildArray, sourceChild => {
-      result.push(this._map(sourceChild, mapperChild));
+    _.map(sourceChildArray, function (sourceChild) {
+      result.push(self._map(sourceChild, mapperChild));
     });
     return result;
   },

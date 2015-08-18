@@ -4,11 +4,13 @@ var addons = require('./addons');
 
 
 var muder =  function (source, mapper, addon) {
-  let result = {};
+  var result = {};
   if (!_.isEmpty(addon)){
     _.assign(addons, addon);
   }
-  _.forEach(mapper, (ref, key) => result[key] = fn._map(source, ref));
+  _.forEach(mapper, function (ref, key) {
+    result[key] = fn._map(source, ref);
+  });
   return result;
 };
 
