@@ -32,7 +32,8 @@ exports.source = {
         Age: 28
       }
     ]
-  }
+  },
+  scoreNum: 0
 };
 
 exports.mapper = {
@@ -72,7 +73,8 @@ exports.mapper = {
     return {
       extra: ''
     };
-  }
+  },
+  score: 'scoreNum'
 
 };
 
@@ -113,5 +115,6 @@ exports.result = {
   year: 2015,
   extra: {
     extra: ''
-  }
+  },
+  score: 0
 };
