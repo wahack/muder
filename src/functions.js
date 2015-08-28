@@ -37,6 +37,7 @@ module.exports = {
     if (typeof mapper === 'number') {
       return mapper;
     }
+    return mapper;
   },
   /**
    * to zip the object
@@ -83,8 +84,9 @@ module.exports = {
   _channel: function _channel (source, ref) {
     if (!ref) return source;
     // console.log(ref.split('|')[1]);
-    return ref.split('|').length === 2 ?
+    var result =  ref.split('|').length === 2 ?
       addons[ref.split('|')[1]]&&addons[ref.split('|')[1]](_.get(source,ref.split('|')[0]))
-      : _.get(source,ref) || '';
+      : _.get(source,ref);
+      return result === undefined ? '' : result;
   }
 };
