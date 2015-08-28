@@ -47,7 +47,9 @@ exports.mapper = {
   },
   constant: function() {
     return 'this is a constant';
-  }
+  },
+  emptyarr: [],
+  emptyObj: {}
 };
 
 exports.result = {
@@ -76,5 +78,7 @@ exports.result = {
   },
   sayHello: 'hello ethan',
   sayMorning: 'Morning ethan liao',
-  constant: 'this is a constant'
+  constant: 'this is a constant',
+  emptyarr: [],
+  emptyObj: {}
 };
