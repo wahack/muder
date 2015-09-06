@@ -82,11 +82,11 @@ module.exports = {
    * get the value of passing object
   */
   _channel: function _channel (source, ref) {
+    var addOn, result;
     if (!ref) return source;
-    // console.log(ref.split('|')[1]);
-    var result =  ref.split('|').length === 2 ?
-      addons[ref.split('|')[1]]&&addons[ref.split('|')[1]](_.get(source,ref.split('|')[0]))
-      : _.get(source,ref);
-      return result === undefined ? '' : result;
+    addOn = addons[ref.split('|')[1]];
+    result =  ref.split('|').length === 2 ? _.get(source,ref.split('|')[0]) : _.get(source,ref);
+    result = result === undefined ? '' : result;
+    return addOn ? addOn(result) : result;
   }
 };
