@@ -5,6 +5,7 @@ var _ = require('lodash');
 module.exports = {
   _map: function _map (source, mapper) {
     var result, self = this;
+    if (_.isEmpty(mapper)) return mapper;
     if ( mapper instanceof Array) {
       result = [];
       _.forEach(mapper, function (ref) {
