@@ -1,6 +1,9 @@
 # muder
 An  object-mapper easy to use.
 
+## install
+`npm install muder`
+
 **usage**
 
     var muder = require('muder')
@@ -12,7 +15,7 @@ For a full example check the `test/example*.js` file.
 
 
 
-# example
+## example
 
 **source object**
 
