@@ -5,7 +5,13 @@ var _ = require('lodash');
 module.exports = {
   _map: function _map (source, mapper) {
     var result, self = this;
+
+    if (typeof mapper === 'function') {
+      return mapper(source);
+    }
+
     if (_.isEmpty(mapper)) return mapper;
+
     if ( mapper instanceof Array) {
       result = [];
       _.forEach(mapper, function (ref) {
@@ -19,6 +25,7 @@ module.exports = {
       });
       return _.flatten(result);
     }
+
     if (typeof mapper === 'object') {
       result = {};
       _.forEach(mapper, function (ref, key){
@@ -26,18 +33,18 @@ module.exports = {
       });
       return result;
     }
+
     if (typeof mapper === 'string') {
       if (/\[\]/.test(mapper)) {
         return this._dig(source, mapper);
       }
       return this._channel (source, mapper);
     }
-    if (typeof mapper === 'function') {
-      return mapper(source);
-    }
+
     if (typeof mapper === 'number') {
       return mapper;
     }
+
     return mapper;
   },
   /**
@@ -54,6 +61,7 @@ module.exports = {
     for (j =0; j < values.length; j++) {
       len = Math.max(len, typeof values[j]!=='string'&&values[j].length || 0);
     }
+
     for (j = 0; j < len; j++) {
       tmp = {};
       for (i = 0; i< keysLen; i++){
@@ -61,6 +69,7 @@ module.exports = {
       }
       result.push(tmp);
     }
+
     return result;
   },
 
