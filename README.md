@@ -17,13 +17,13 @@ or include it directly in browser
 
 ##simple example
 
-  var source = {sayssshello: 'hello world!'};
-  var mapper = {sayHello: 'sayssshello'};
+    var source = {sayssshello: 'hello world!'};
+    var mapper = {sayHello: 'sayssshello'};
 
-  muder(source,mapper);
+    muder(source,mapper);
 
-  // output:
-  // {sayHello: 'hello world!'}
+    // output:
+    // {sayHello: 'hello world!'}
 
 
 
