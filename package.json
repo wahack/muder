@@ -1,6 +1,6 @@
 {
   "name": "muder",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "an object mapper",
   "main": "index.js",
   "scripts": {
@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/wahack/muder#readme",
   "dependencies": {
-    "babel": "^5.8.21",
-    "lodash": "^3.10.1"
+
   },
   "devDependencies": {
+    "babel": "^5.8.21",
     "mocha": "^2.2.5"
   },
   "gitHead": "5b5cac9755c9fb338ef7cf5f260d9d314cab40ec",
