@@ -1,28 +1,28 @@
 var addons = require('./addons');
-var _ = require('lodash');
-
+var helper = require('./helper');
 
 module.exports = {
   _map: function _map (source, mapper) {
     var result, self = this;
-    if (_.isEmpty(mapper) && typeof mapper !== 'function' && typeof mapper !== 'number') return mapper;
+    if (mapper === '') return source;
+    if (helper.is.Empty(mapper) && typeof mapper !== 'function' && typeof mapper !== 'number') return mapper;
     if ( mapper instanceof Array) {
       result = [];
-      _.forEach(mapper, function (ref) {
+      mapper.forEach(function (ref) {
         if (typeof ref === 'string') {
           result.push(self._map(source, ref));
         } else {
-          result.push(self._zipObject(_.mapValues(ref, function (val){
+          result.push(self._zipObject(helper.mapValues(ref, function (val){
             return self._map(source,val);
           })));
         }
       });
-      return _.flatten(result);
+      return helper.flattenDeep(result);
     }
     if (typeof mapper === 'object') {
       result = {};
-      _.forEach(mapper, function (ref, key){
-        result[key] = self._map(source, ref);
+      helper.keys(mapper).forEach(function (key){
+        result[key] = self._map(source, mapper[key]);
       });
       return result;
     }
@@ -47,9 +47,9 @@ module.exports = {
   */
   _zipObject: function _zipObject(ob) {
     var result = [], values, keys, keysLen, i, j, tmp, len = 0;
-    keys = _.keys(ob);
+    keys = helper.keys(ob);
     keysLen = keys.length;
-    values = _.values(ob);
+    values = helper.values(ob);
 
     for (j =0; j < values.length; j++) {
       len = Math.max(len, typeof values[j]!=='string'&&values[j].length || 0);
@@ -73,7 +73,8 @@ module.exports = {
     var result = [], self = this, sourceChildArray, mapperChild;
     sourceChildArray = this._map(source, mapper.substr(0, mapper.indexOf('[]')));
     mapperChild = mapper.substr(mapper.indexOf('[]')+3);
-    _.map(sourceChildArray, function (sourceChild) {
+
+    sourceChildArray.forEach(function (sourceChild) {
       result.push(self._map(sourceChild, mapperChild));
     });
     return result;
@@ -86,7 +87,7 @@ module.exports = {
     var addOn, result;
     if (!ref) return source;
     addOn = addons[ref.split('|')[1]];
-    result =  ref.split('|').length === 2 ? _.get(source,ref.split('|')[0]) : _.get(source,ref);
+    result =  ref.split('|').length === 2 ? helper.get(source,ref.split('|')[0]) : helper.get(source,ref);
     result = result === undefined ? '' : result;
     return addOn ? addOn(result) : result;
   }

@@ -1,15 +1,15 @@
-var _ = require('lodash');
+var helper = require('./helper');
 var fn = require('./functions');
 var addons = require('./addons');
 
 
 var muder =  function (source, mapper, addon) {
   var result = {};
-  if (!_.isEmpty(addon)){
-    _.assign(addons, addon);
+  if (!helper.is.Empty(addon)){
+    helper.assign(addons, addon);
   }
-  _.forEach(mapper, function (ref, key) {
-    result[key] = fn._map(source, ref);
+  helper.keys(mapper).forEach(function (key) {
+    result[key] = fn._map(source, mapper[key]);
   });
   return result;
 };
