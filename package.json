@@ -4,7 +4,8 @@
   "description": "an object mapper",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test --compilers js:babel/register"
+    "test": "mocha test --compilers js:babel/register",
+    "build": "webpack --progress --hide-modules"
   },
   "repository": {
     "type": "git",
@@ -23,10 +24,9 @@
     "url": "https://github.com/wahack/muder/issues"
   },
   "homepage": "https://github.com/wahack/muder#readme",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
+    "webpack": "^1.12.14",
     "babel": "^5.8.21",
     "mocha": "^2.2.5"
   },

@@ -2,20 +2,35 @@
 An  object-mapper easy to use.
 
 ## install
-`npm install muder`
+
+  npm install muder
+
+
+or include it directly in browser
+
+  <script src="path/to/dist/muder.min.js"></script>
 
 **usage**
 
-    var muder = require('muder')
 
     var result = muder(source, mapper[, addon]);
+
+##simple example
+
+  var source = {sayssshello: 'hello world!'};
+  var mapper = {sayHello: 'sayssshello'};
+
+  muder(source,mapper);
+
+  // output:
+  // {sayHello: 'hello world!'}
+
 
 
 For a full example check the `test/example*.js` file.
 
 
-
-## example
+##advanced example
 
 **source object**
 
